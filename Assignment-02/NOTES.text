@@ -1,0 +1,79 @@
+-package.json is configuration for npm 
+-The most imp package in our project is bundler
+-HTML,CSS,JS whole code to be bundle which does webpack bundler and shift it to production.
+- create-react-app uses webpack and babbel to build things up.
+-we are going to use parcel package.
+-There are two type of packages /dependency -
+  1) Dev Dependency - used at the time of Development
+  2) Normal Dependency - used at the time of Production
+
+> npm install -D parcel
+
+- We are using Dev dependency for now.
+
+^(caret) - ^1.2.3 will update minor version ^1.2.6
+           we should use caret at all 
+
+~(tilde) -  ~1.2.3 will update major version ~2.2.3
+
+- package.json : is configuration for npm
+                 It keeps track of what version is installed on our system. keeps approx version
+
+- package-lock.json : keeps track of all exact version of all the dependency.
+                     keeps a hash that whatever is in my machine is the same thing deploy on production.
+
+- node_modules :- fetch all the code of all the dependencies (parcel) in our system.
+                - and our dependency (parcel) have many other dependency thats why node_module have parcel and many more packages. This is known as transitive dependency.
+                - node_module is a collection of dependencies.
+
+                - IF we have package.json and package-lock.json then we can recreate our node node_modules again(using npm install) . So we can keep it in gitignore.
+
+
+ > npx parcel index.html
+
+ npx - executing a package.
+
+  > npm i react-dom
+
+parcel :
+  Documentation : https://parceljs.org/
+- Dev build
+- Local Server
+- HMR = Hot Module Replacement (autorefreshing page)
+- File Watching Algorithm - written in C++
+- caching - Faster Builds
+- Image optimization
+- Minification
+- Bundling 
+- Compress
+- Consistant Hashing
+- Code splitting
+- Differential Bundling - support older browsers as well
+- Error handling - (gives better error suggesions)
+- HTTPs
+- Tree shaking - remove unused code 
+- Different dev and prod bundles
+
+To make build :
+
+> npx parcel build index.html
+
+Error : Did you mean "App.html"? 
+ Try changing the file extension of "main" in package.json.
+
+ ErrorResolve : remove "main": "app.js" from package.json
+
+
+
+ - npx parcel index.html will regenerate dist and parcel-catche i.e it can be regenerate so it will go in gitignore.
+
+- If we want to make use / allow our app on older browsers then we can put  
+ "browserslist":[
+    "last 2 versions"
+  ]
+in our package.json , where browserslist is from node_modules
+ - check it at https://browserslist.dev/
+
+
+ Episode 3 :
+ 
