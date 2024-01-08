@@ -1,3 +1,5 @@
+>npm init
+
 -package.json is configuration for npm 
 -The most imp package in our project is bundler
 -HTML,CSS,JS whole code to be bundle which does webpack bundler and shift it to production.
@@ -12,7 +14,7 @@
 - We are using Dev dependency for now.
 
 ^(caret) - ^1.2.3 will update minor version ^1.2.6
-          - we should use caret at all 
+           we should use caret at all 
 
 ~(tilde) -  ~1.2.3 will update major version ~2.2.3
 
@@ -33,7 +35,7 @@
 
  npx - executing a package.
 
-  > npm i react-dom
+  > npm i react react-dom
 
 parcel :
   Documentation : https://parceljs.org/
@@ -75,5 +77,51 @@ in our package.json , where browserslist is from node_modules
  - check it at https://browserslist.dev/
 
 
- Episode 3 :
- 
+ //-------------Episode 3 :-----------------
+ -Benifits of JSX
+-Babel and parcel role in JSX
+-Components
+ -Composing Components
+
+
+ - We can write scripts in package.json to start and build our project like ( "start" : "parcel index.html",
+    "build" : "parcel build index.html") 
+    - and now we are no more longer using >npx parcel index.html we will use >npm run start  to run project 
+
+- >npm run start == >npm start are same
+- >npm run start behind the seens execute the package parcel with the index.html bacause we have configured this inside our package.json
+
+- JSX :
+ JSX is Javascript syntax which is easier to create react elements.
+
+ Babel - converts all JSX code into React.createElement
+
+**HOMEWORK - explore diff attribute in JSX
+
+Extensions - prettier,bracket pair colorizer, Eslint,Better Comments 
+
+- Functional Componant :
+ Is a function that return some pieace of JSX code.
+
+-Componant Composition :
+ Component inside Component
+ Composing two component in one another 
+
+
+ What is JSX ?
+ -> It is Javascript syntax which is easier to create react elements.
+
+ SuperPower of JSX
+ -> We can use javascript in JSX using {}  (curly brackets)
+ -> We can use element and function in jsx using js
+
+
+
+ {TitleComponent()} vs {<TitleComponent/>} vs {<TitleComponent></TitleComponent>} in JSX
+ -> This all are same i.e calling function in another component and component within component
+
+
+
+
+
+

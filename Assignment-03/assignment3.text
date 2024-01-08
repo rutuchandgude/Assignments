@@ -8,16 +8,18 @@ Topics
 -Components
  -Composing Components
 
- Assignment
-
  What is JSX ?
- ->
+ -> It is Javascript syntax which is easier to create react elements.
 
  SuperPower of JSX
- ->
+ -> We can use javascript in JSX using {}  (curly brackets)
+ -> We can use element and function in jsx using js
 
- {TitleComponent} vs {TitleComponent/} in JSX
 
- Coding Assignment:
+
+ {TitleComponent()} vs {<TitleComponent/>} vs {<TitleComponent></TitleComponent>} in JSX
+ -> This all are same i.e calling function in another component and component within component
+
+
 
  
