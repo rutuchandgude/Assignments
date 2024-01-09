@@ -1,12 +1,3 @@
-Assignment 03 - Laying the foundation
-
-Topics
--JSX:
--React.createElement vs JSX
--Benifits of JSX
--Babel and parcel role in JSX
--Components
- -Composing Components
 
  What is JSX ?
  -> It is Javascript syntax which is easier to create react elements.
@@ -15,11 +6,5 @@ Topics
  -> We can use javascript in JSX using {}  (curly brackets)
  -> We can use element and function in jsx using js
 
-
-
  {TitleComponent()} vs {<TitleComponent/>} vs {<TitleComponent></TitleComponent>} in JSX
  -> This all are same i.e calling function in another component and component within component
-
-
-
- 
