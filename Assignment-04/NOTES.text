@@ -154,4 +154,26 @@ props :
 
 
 
+  JSON viewer - Is a crome extension , Json will looks good.
+
+- Config Driven UI :
+  -Website is Driven by config (JSON Data).
+  -Data is Different for different Location.
+  -UI will change as backend data change.
+ Ex : 
+ Swiggy have Diff UI and Diff Restaurant For Diff Location.The cards are different.
+
+Array join JS -
+ join is property to join array.
+
+optional chaining :
+ ex : const {name,avgRating} = resData?.data;
+ 
+ Warning : Each child in a list should have a unique "key" prop.
+->- When we are looping any List you have to give a key. Where we have to pass unique id.
+  - ex: If their is a new card added , react dont know where to put that card so it will rerender all the 15 cards, it will treat all restro card as same .
+  But if we give id , react will know that exact card , will render one restro card.
+  - So use unique key at all when you use List or map function.
+  - Dont use index as a key , this isnt recommanded. use it as last resort. 
+
 
