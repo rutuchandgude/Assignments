@@ -176,6 +176,34 @@ optional chaining :
 
 //---------------------------------Episode-05 - Lets get Hooked--------------------------------------------
 
+Two Types of Export / Import :-
+
+ - Default Export / Import
+
+   export default component;
+   import Componant from "path";
+
+ - Named Export / Import :
+  
+  export const Componant;
+  import {Componant} from "path";
+  
+  #React Hooks :
+   -useState() - SuperPowerful state variable in react
+   -useEffect()-
+
+whenever state variable updates/changes react rerender the component.
+
+  React Algorithm :
+   React uses Reconciliation algorithm (React Fiber) :
+   ITs new way to find 
+    
+   Virtual DOM : It is a representation of actual DOM .
+
+ Diff Algorithm :
+   
+
+
 
 
 
