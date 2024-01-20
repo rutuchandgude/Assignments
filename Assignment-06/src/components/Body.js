@@ -1,18 +1,27 @@
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
-import resList from "../utils/mockData";
-
+import swiggy_API_URL from "../utils/constants";
+import Shimmer from "./Shimmer";
 const Body = () => {
 
-  const [listOfRestaurants, setListOfRestaurant] = useState(resList);
+  const [listOfRestaurants, setListOfRestaurant] = useState([]);
   
   useEffect(()=>{
 fetchData();
   },[]);
-const fetchData = () =>{
-  const data = fetch()
-}
+const fetchData = async () =>{
+  const data =await fetch(
+    "https://foodfire.onrender.com/api/restaurants?lat=21.1702401&lng=72.83106070000001&page_type=DESKTOP_WEB_LISTING"
+    );
+const json = await data.json();
+console.log(json);
+//Optional Chaining
+setListOfRestaurant(json?.data?.cards[2]?.data?.data?.cards);
+};
 
+if(listOfRestaurants.length === 0){
+  return <Shimmer/>;
+}
   return (
         <div className="body">
             <div className="filter">

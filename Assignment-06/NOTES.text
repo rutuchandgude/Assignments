@@ -230,10 +230,13 @@ All teh sevices combine together forms a big App.
  - useEffect is a function , we call this function by passing another function in it , which is callback function.
  - useEffect(callback function , dependency array)
 
+*H.W :  Optional chaining (Watch it into Namaste JS)
 
+Optional chaining :
+- The optional chaining (?.) operator accesses an object's property or calls a function. If the object accessed or function called using this operator is undefined or null, the expression short circuits and evaluates to undefined instead of throwing an error.
 
-
-
+What is a shimmer UI?
+- A shimmer UI is a version of the UI that doesn't contain actual content, but instead mimics the layout and shapes of the content that will eventually appear.
 
 
 
