@@ -2,6 +2,7 @@ import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import swiggy_API_URL from "../utils/constants";
 import Shimmer from "./Shimmer";
+
 const Body = () => {
 
   const [listOfRestaurants, setListOfRestaurant] = useState([]);
@@ -9,6 +10,7 @@ const Body = () => {
   useEffect(()=>{
 fetchData();
   },[]);
+  
 const fetchData = async () =>{
   const data =await fetch(
     "https://foodfire.onrender.com/api/restaurants?lat=21.1702401&lng=72.83106070000001&page_type=DESKTOP_WEB_LISTING"
@@ -16,13 +18,13 @@ const fetchData = async () =>{
 const json = await data.json();
 console.log(json);
 //Optional Chaining
+console.log(json);
 setListOfRestaurant(json?.data?.cards[2]?.data?.data?.cards);
 };
 
-if(listOfRestaurants.length === 0){
-  return <Shimmer/>;
-}
-  return (
+return listOfRestaurants.length === 0? (
+   <Shimmer/>
+) : (
         <div className="body">
             <div className="filter">
               <button className="filter-btn"
@@ -33,7 +35,8 @@ if(listOfRestaurants.length === 0){
               setListOfRestaurant(filteredList);
                }} 
                >
-                Top Rated Restaurants</button>
+                Top Rated Restaurants
+                </button>
               </div>
             <div className="res-container">
               {listOfRestaurants.map((restaurant)=>{
