@@ -20,8 +20,10 @@ console.log("Header render");
                     <li>Cart</li>
                     <button
                      className="login" 
-                     onClick={( )=> {
-                        setBtnNameReact("Logout");
+                     onClick={()=> {
+                        btnNameReact === "Login"
+                        ? setBtnNameReact("Logout")
+                        : setBtnNameReact("Login");
                         }}>
                           {btnNameReact}
                         </button>

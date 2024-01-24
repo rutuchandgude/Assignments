@@ -239,22 +239,27 @@ What is a shimmer UI?
 - A shimmer UI is a version of the UI that doesn't contain actual content, but instead mimics the layout and shapes of the content that will eventually appear.
 
 
+// ---------------Episode 6.1 - Swiggy API Issue Resolved--------------------------
 
+-JSON viewer - crome extension
+- install Json viewer to see the API data in json format to understand.
+- One more error in console of CORS - Toggle On to the CORS plugin(solved)
+-Error :TypeError: Cannot read properties of undefined (reading 'map')
+=> key={restaurant.info.id}
 
+- Error :TypeError: Cannot destructure property 'cloudinaryImageId' of '(intermediate value)' as it is undefined.
+=>changed data to info in RestaurantCard.js component
+ (  resData?.info;)
 
+//-----------------Episode 6.2 CORS Plugin Issue solved-----------------------------------
 
+- Go to corsproxy.io website copy https://corsproxy.io/?
+add this before url , now you dont have to use CORS plugin.
 
+Swiggy API URL = https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING 
 
-
-
-
-
-
-
-
-
-
-
+but above solution didnt worked for me cause website showing you are blocked so I have used :
+ - Go to corsproxy.org URL , Paste Swiggy API, and CORS Proxy will create a URL for You.Need to fetch the provided API Instead of Swiggy API.
 
 
 
