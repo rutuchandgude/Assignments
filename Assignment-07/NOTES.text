@@ -275,5 +275,21 @@ but above solution didnt worked for me cause website showing you are blocked so 
 • What is async and await ?
 • What is the use of 'const json = await data.json();' in getRestaurants()
 
+//---------------Episode 07 ------------------------------------------
+useEffect Hook:
+
+//If no dependency array => useEffect is called on every render
+//If dependency array is empty = [] => useEffect is called on initial render(just once)
+//If dependency array is [btnNameReact] => called everytime btnNameReact is updated.
+
+useState Hook :
+- It is used for creating local state variable inside your component.
+- Never use useState inside if else condition.
 
 
+- Install React Router DOM library(check version in package.json)
+> npm install react-router-dom
+
+- create routing configuration and adding it to root.render in App.js
+
+* useRouteError Hook - To show more information about the error in the error page .
