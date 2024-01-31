@@ -293,3 +293,6 @@ useState Hook :
 - create routing configuration and adding it to root.render in App.js
 
 * useRouteError Hook - To show more information about the error in the error page .
+ -import this in Error.js
+ -import {useRouteError} from "react-router-dom"
+ -{useRouteError} is a hook which dont allow that red-colour error to come in console.It catch all routing Error and we can show those error to the user.
