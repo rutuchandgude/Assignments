@@ -296,3 +296,23 @@ useState Hook :
  -import this in Error.js
  -import {useRouteError} from "react-router-dom"
  -{useRouteError} is a hook which dont allow that red-colour error to come in console.It catch all routing Error and we can show those error to the user.
+
+ - A SuperPower given us by react router DOM is Link component.
+ -It just changes the Components.
+
+ # Two types of routing in web Apps
+ -Client Side Routing:
+   -Dynamically update content of SPA in response to change in URL.
+   - Dont do full page reload.
+  
+ -Server side Routing:
+   -All our pages come from server.
+   -Make a network call , get the HTML , CSS , JS and loads the whole page.
+
+- Dynamic Routing :
+   Process of rendering components in response to a change in the application's URL.
+
+   -If the route to restaurant menu page is like
+   {
+    path:"/restaurant/:id"   (id is dynamic , it element:<RestMenu/>      can be anything)
+   }
