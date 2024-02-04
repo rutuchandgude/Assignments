@@ -316,3 +316,5 @@ useState Hook :
    {
     path:"/restaurant/:id"   (id is dynamic , it element:<RestMenu/>      can be anything)
    }
+
+   
