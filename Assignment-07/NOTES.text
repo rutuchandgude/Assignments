@@ -317,4 +317,27 @@ useState Hook :
     path:"/restaurant/:id"   (id is dynamic , it element:<RestMenu/>      can be anything)
    }
 
-   
+- To read the "id" passed in URL, 'react-router-dom' provides us useParams Hook.
+
+import {useParams} from react-router-dom
+
+const RestaurantMenu = () =>{
+  const params = useParams();
+const {id} = params;
+return (
+//.....
+);
+}
+
+-Using Swiggy API to make RestaurantMenu page:
+since now we are rendering data from API, we know that the data will be fetched only after the initial
+rendering. But during that initial render, the component will not get access to our API data and the data will be
+shown as undefined. To overcome that, we will do Optional rendering :- render the Shimmer if API data is not
+fetched, else render the RestaurantMenu component.
+
+- we have taken the API for one random restaurant from Swiggy. How about taking using each restaurant’s data
+from the restaurants we are showing in our home page. To do, we will call the API dynamically i.e. using that specific
+restaurant’s ID in the RestaurantMenu.js and we will also provide Link tag to each Restaurant Card in Body.js.
+   //ERROR : 
+   // -TypeError: Cannot destructure property 'name' of '(intermediate value)' as it is undefined.
+   // ANS : Removed ternary Operater
