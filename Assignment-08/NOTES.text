@@ -1,0 +1,373 @@
+•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+>npm init
+
+-package.json is configuration for npm 
+-The most imp package in our project is bundler
+-HTML,CSS,JS whole code to be bundle which does webpack bundler and shift it to production.
+- create-react-app uses webpack and babbel to build things up.
+-we are going to use parcel package.
+-There are two type of packages /dependency -
+  1) Dev Dependency - used at the time of Development
+  2) Normal Dependency - used at the time of Production
+
+> npm install -D parcel
+
+- We are using Dev dependency for now.
+
+^(caret) - ^1.2.3 will update minor version ^1.2.6
+           we should use caret at all 
+
+~(tilde) -  ~1.2.3 will update major version ~2.2.3
+
+- package.json : is configuration for npm
+                 It keeps track of what version is installed on our system. keeps approx version
+
+- package-lock.json : keeps track of all exact version of all the dependency.
+                     keeps a hash that whatever is in my machine is the same thing deploy on production.
+
+- node_modules :- fetch all the code of all the dependencies (parcel) in our system.
+                - and our dependency (parcel) have many other dependency thats why node_module have parcel and many more packages. This is known as transitive dependency.
+                - node_module is a collection of dependencies.
+
+                - IF we have package.json and package-lock.json then we can recreate our node node_modules again(using npm install) . So we can keep it in gitignore.
+
+
+ > npx parcel index.html
+
+ npx - executing a package.
+
+  > npm i react react-dom
+
+parcel :
+  Documentation : https://parceljs.org/
+- Dev build
+- Local Server
+- HMR = Hot Module Replacement (autorefreshing page)
+- File Watching Algorithm - written in C++
+- caching - Faster Builds
+- Image optimization
+- Minification
+- Bundling 
+- Compress
+- Consistant Hashing
+- Code splitting
+- Differential Bundling - support older browsers as well
+- Error handling - (gives better error suggesions)
+- HTTPs
+- Tree shaking - remove unused code 
+- Different dev and prod bundles
+
+To make build :
+
+> npx parcel build index.html
+
+Error : Did you mean "App.html"? 
+ Try changing the file extension of "main" in package.json.
+
+ ErrorResolve : remove "main": "app.js" from package.json
+
+
+
+ - npx parcel index.html will regenerate dist and parcel-catche i.e it can be regenerate so it will go in gitignore.
+
+- If we want to make use / allow our app on older browsers then we can put  
+ "browserslist":[
+    "last 2 versions"
+  ]
+in our package.json , where browserslist is from node_modules
+ - check it at https://browserslist.dev/
+
+
+ //-------------Episode 3 :-----------------
+ -Benifits of JSX
+-Babel and parcel role in JSX
+-Components
+ -Composing Components
+
+
+ - We can write scripts in package.json to start and build our project like ( "start" : "parcel index.html",
+    "build" : "parcel build index.html") 
+    - and now we are no more longer using >npx parcel index.html we will use >npm run start  to run project 
+
+- >npm run start == >npm start are same
+- >npm run start behind the seens execute the package parcel with the index.html bacause we have configured this inside our package.json
+
+- JSX :
+ JSX is Javascript syntax which is easier to create react elements.
+
+ Babel - converts all JSX code into React.createElement
+
+**HOMEWORK - explore diff attribute in JSX
+
+Extensions - prettier,bracket pair colorizer, Eslint,Better Comments 
+
+- Functional Componant :
+ Is a function that return some pieace of JSX code.
+
+-Componant Composition :
+ Component inside Component
+ Composing two component in one another 
+
+
+ What is JSX ?
+ -> It is Javascript syntax which is easier to create react elements.
+
+ SuperPower of JSX
+ -> We can use javascript in JSX using {}  (curly brackets)
+ -> We can use element and function in jsx using js
+
+ {TitleComponent()} vs {<TitleComponent/>} vs {<TitleComponent></TitleComponent>} in JSX
+ -> This all are same i.e calling function in another component and component within component
+
+
+//-----Episode-04  Talk is cheap , show me the code--------------------------------------
+/*
+* Header
+*  -Logo
+*  -Nav Items
+*Body
+*  -Search
+*  -RestaurantContainer
+*    -RestaurantCard
+*Footer
+*  -Copyright
+*  -Links
+*  -Address
+*  -Contact
+*/
+
+props :
+ -properties are something we can pass to the component
+ -passing prop to a component is passing arguments to a function.
+
+ Destructuring props :
+  - const {resName,cuisine} = props;
+
+  const RestroCard = (props)=>{
+    const {resName,cuisine} = props;
+    return(
+      <div>
+      <h3>{resName}</h3>
+      <h3>{cuisine}</h3>
+      </div>
+    );
+  }
+
+  JSON viewer - Is a crome extension , Json will looks good.
+
+- Config Driven UI :
+  -Website is Driven by config (JSON Data).
+  -Data is Different for different Location.
+  -UI will change as backend data change.
+ Ex : 
+ Swiggy have Diff UI and Diff Restaurant For Diff Location.The cards are different.
+
+Array join JS -
+ join is property to join array.
+
+optional chaining :
+ ex : const {name,avgRating} = resData?.data;
+ 
+ Warning : Each child in a list should have a unique "key" prop.
+->- When we are looping any List you have to give a key. Where we have to pass unique id.
+  - ex: If their is a new card added , react dont know where to put that card so it will rerender all the 15 cards, it will treat all restro card as same .
+  But if we give id , react will know that exact card , will render one restro card.
+  - So use unique key at all when you use List or map function.
+  - Dont use index as a key , this isnt recommanded. use it as last resort. 
+
+//---------------------------------Episode-05 - Lets get Hooked--------------------------------------------
+
+Two Types of Export / Import :-
+
+ - Default Export / Import
+
+   export default component;
+   import Componant from "path";
+
+ - Named Export / Import :
+  
+  export const Componant;
+  import {Componant} from "path";
+  
+  #React Hooks :
+   -useState() - SuperPowerful state variable in react
+   -useEffect()-
+
+whenever state variable updates/changes react rerender the component.
+
+  React Algorithm :
+   React uses Reconciliation algorithm (React Fiber) :
+   ITs new way to find 
+    
+   Virtual DOM : It is a representation of actual DOM .
+
+ Diff Algorithm :
+   
+
+  //-------------Episode-06 : Explore the world------------------------------
+
+• What is Monolith architecture?
+=> In older days , we used to have single big an application where API , UI , Auth ,DB ,SMS, Notifications , JSP (Java servlet pages) in the same project. If we have to make a single change (ex. change a button) , we have to deploy whole project .that was monolith architecture.
+
+• Microservice Architecture :
+In Microservice Architecture we have diff services for different job like BE , UI , Auth , DB , SMS , Email Notifications these are services which are Microservices.
+All teh sevices combine together forms a big App.
+-So here we have difference project for different job . Which is SEPARATION OF CONCERN.
+-The tools and languages used in a project depend on usecase.
+-We can have different tech stack for different things.
+- All services run on diff port but same domain name.
+
+- How Web Apps/UI fetch the data from backend:
+1] App Loads => API Call(500 milisecond) => Render
+  - As soon as our page loads wait for API and render the UI.
+
+2] Loades => render UI => API call => Update teh UI
+  -page loads we will quickly render UI , now we will make API call  and after getting result from API  We will render it Again. Which is good for better UX. 
+
+•useEffect Hook -
+ -Hook : Hook is just normal JS function which react gives us for specific purpose.
+ - We get this from react library.
+ - useEffect is a function , we call this function by passing another function in it , which is callback function.
+ - useEffect(callback function , dependency array)
+
+*H.W :  Optional chaining (Watch it into Namaste JS)
+
+Optional chaining :
+- The optional chaining (?.) operator accesses an object's property or calls a function. If the object accessed or function called using this operator is undefined or null, the expression short circuits and evaluates to undefined instead of throwing an error.
+
+What is a shimmer UI?
+- A shimmer UI is a version of the UI that doesn't contain actual content, but instead mimics the layout and shapes of the content that will eventually appear.
+
+
+// ---------------Episode 6.1 - Swiggy API Issue Resolved--------------------------
+
+-JSON viewer - crome extension
+- install Json viewer to see the API data in json format to understand.
+- One more error in console of CORS - Toggle On to the CORS plugin(solved)
+-Error :TypeError: Cannot read properties of undefined (reading 'map')
+=> key={restaurant.info.id}
+
+- Error :TypeError: Cannot destructure property 'cloudinaryImageId' of '(intermediate value)' as it is undefined.
+=>changed data to info in RestaurantCard.js component
+ (  resData?.info;)
+
+//-----------------Episode 6.2 CORS Plugin Issue solved-----------------------------------
+
+- Go to corsproxy.io website copy https://corsproxy.io/?
+add this before url , now you dont have to use CORS plugin.
+
+Swiggy API URL = https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING 
+
+but above solution didnt worked for me cause website showing you are blocked so I have used :
+ - Go to corsproxy.org URL , Paste Swiggy API, and CORS Proxy will create a URL for You.Need to fetch the provided API Instead of Swiggy API.
+
+
+
+• What is a Microservices ?
+• What is Monolith architecture?
+• What is the difference between Monolith and Microservice?
+• Why do we need a useEffect Hook?
+• What is Optional Chaining?
+• What is Shimmer UI?
+• What is the difference between JS expression and JS statement
+• What is Conditional Rendering, explain with a code example
+• What is CORS?
+• What is async and await ?
+• What is the use of 'const json = await data.json();' in getRestaurants()
+
+//---------------Episode 07 ------------------------------------------
+useEffect Hook:
+
+//If no dependency array => useEffect is called on every render
+//If dependency array is empty = [] => useEffect is called on initial render(just once)
+//If dependency array is [btnNameReact] => called everytime btnNameReact is updated.
+
+useState Hook :
+- It is used for creating local state variable inside your component.
+- Never use useState inside if else condition.
+
+
+- Install React Router DOM library(check version in package.json)
+> npm install react-router-dom
+
+- create routing configuration and adding it to root.render in App.js
+
+* useRouteError Hook - To show more information about the error in the error page .
+ -import this in Error.js
+ -import {useRouteError} from "react-router-dom"
+ -{useRouteError} is a hook which dont allow that red-colour error to come in console.It catch all routing Error and we can show those error to the user.
+
+ - A SuperPower given us by react router DOM is Link component.
+ -It just changes the Components.
+
+ # Two types of routing in web Apps
+ -Client Side Routing:
+   -Dynamically update content of SPA in response to change in URL.
+   - Dont do full page reload.
+  
+ -Server side Routing:
+   -All our pages come from server.
+   -Make a network call , get the HTML , CSS , JS and loads the whole page.
+
+- Dynamic Routing :
+   Process of rendering components in response to a change in the application's URL.
+
+   -If the route to restaurant menu page is like
+   {
+    path:"/restaurant/:id"   (id is dynamic , it element:<RestMenu/>      can be anything)
+   }
+
+- To read the "id" passed in URL, 'react-router-dom' provides us useParams Hook.
+
+import {useParams} from react-router-dom
+
+const RestaurantMenu = () =>{
+  const params = useParams();
+const {id} = params;
+return (
+//.....
+);
+}
+
+-Using Swiggy API to make RestaurantMenu page:
+since now we are rendering data from API, we know that the data will be fetched only after the initial
+rendering. But during that initial render, the component will not get access to our API data and the data will be
+shown as undefined. To overcome that, we will do Optional rendering :- render the Shimmer if API data is not
+fetched, else render the RestaurantMenu component.
+
+- we have taken the API for one random restaurant from Swiggy. How about taking using each restaurant’s data
+from the restaurants we are showing in our home page. To do, we will call the API dynamically i.e. using that specific
+restaurant’s ID in the RestaurantMenu.js and we will also provide Link tag to each Restaurant Card in Body.js.
+   //ERROR : 
+   // -TypeError: Cannot destructure property 'name' of '(intermediate value)' as it is undefined.
+   // ANS : Removed ternary Operater
+
+//---------Episode-08 Lets get Classy-------------------------------
+Class Based Components:
+-It was less maintainable, have more code and little messy.
+-Class component are no longer used.
+-Developers can do almost everything using functional components now.
+-Functional component, at the EOD is just normal JS function.
+-Similarly, Class based components are just normal JS class.
+
+- Class Based Component :
+
+import React from "react";
+class Profile extends React.component{
+  render(){
+    return <h1> Profile </h1>
+  }
+}
+export default Profile;
+
+- Functional Component:
+const Profile =()=>{
+  return(
+    <h1> Profile </h1>
+  )
+}
+
+- React.component come from react, to tell react that this is class component not normal js class
+-we can't create javascript component without render method.
+
+
