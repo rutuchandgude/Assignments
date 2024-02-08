@@ -370,4 +370,58 @@ const Profile =()=>{
 - React.component come from react, to tell react that this is class component not normal js class
 -we can't create javascript component without render method.
 
+- Props in class Components :
+  - In About.js suppose we called class component "ProfileClass.js" and pass props inside it like-
+ <Profile class name={"Rutuja"} />
+  - So in class component we have "this keyword". So in "ProfileClass.js"
+     <h2>Name : {this.props.name}</h2>
+     
+    - Even if There are many props, we can use props like this:
+    - <ProfileClass name={"Rutuja"} xyz={a,b,c} />
+    -<h2>Name : {this.props.name} </h2>
+     <h2>xyz : {this.props.xyz} </h2>
+
+     State in class Component :
+    class UserClass extends React.Component{
+    constructor(props){
+        super(props);
+
+     this.state = {
+        count: 0,
+        count2: 2,
+     };
+    }}
+
+    -constructor function is called only once,when the component is first created and initialized, making it an ideal place to set the initial state of the component using 
+     this.state ={..} 
+     - Super(props) is necessary because it passes the received props to the constructor of the base component class , allowing the component access its properties.
+  - whenever we load a class , constructor is called.
+  - To use the state we created :
+
+  render(){
+    return (
+      <h2>count: {this.state.count}</h2>
+      <h2>count2: {this.state.count2}</h2>
+    );
+  };
+
+//////////////
+- setCount :
+-Never update state variables directly.
+
+render(){
+  return(
+    <h2>count : {this.state.count}</h2>
+    <button
+    onClick = {
+      ()=>{
+        this.setState({
+          count:1,
+          count2:2
+        })
+      }
+    }
+    ></button>
+  )
+}
 
