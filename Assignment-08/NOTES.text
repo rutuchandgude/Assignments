@@ -405,23 +405,251 @@ const Profile =()=>{
     );
   };
 
-//////////////
-- setCount :
--Never update state variables directly.
 
-render(){
-  return(
-    <h2>count : {this.state.count}</h2>
-    <button
-    onClick = {
-      ()=>{
-        this.setState({
-          count:1,
-          count2:2
-        })
+React Lifecycle :
+-First constructor is called 
+-Then component is rendered
+
+-React component lifecycle refers to the series of methods that get executed at different stages of a components exicuted at different stagesof a components existence in React application.
+  The lifecycle methods can be divided into 3 phases:
+  1) Mounting phase
+  2)Updating phase
+  3)Unmounting phase
+
+  Mounting Phase:
+  - These methods are called when an instance of a component is being created and inserted into the DOM:
+     -constructor()
+     -static get Derived State from props()
+     -render
+     -componentDidMount() -> This method is called immediately after the first render of a component.It is executed only once during the lifecycle of a component.
+      -Best place to make API call in class Components -
+        => componentDidMount(){..}
+        - This is because during mounting phase.
+        1)constructor() -> is called
+    then2)render() -> is called
+    atlast,3)componentDidMount() ->is called
+
+    Eg: 
+      Class Apidatafetchexample extends React,component{
+        state = {data:[],loading:true,error:null};
+        componentDidMount(){
+          this.fetchData();
+        }
+        fetchData=()=>{
+          fetch("https://api.example/data")
+          .then(response=>response.json())
+          .then(data=>this.setState({data,loading:false}));
+          catch(error => this.setState({error,loading:false}));
+        };
       }
+
+
+*----About.js------
+import User from "./User";
+import UserClass from "./UserClass";
+import { Component } from "react";
+
+class About extends Component{
+    constructor(props){
+        super(props);
+
+        console.log("Parent Constructor");
     }
-    ></button>
-  )
+    componentDidMount(){
+        console.log("Parent Component Did Mount");
+    }
+    
+    render(){
+        console.log("Parent Render");
+        return(
+           <div>
+            <h1>About Class Component</h1>
+            <h2>This is Namaste React Web series</h2>
+            <UserClass name={"First"} location={"Dehradun Class"}/>
+            <UserClass name={"Second"} location={"US"}/>
+           </div> 
+        );
+    }
 }
 
+export default About;
+
+
+*-----UserClass.js-----
+
+import React from "react";
+
+class UserClass extends React.Component{
+    constructor(props){
+        super(props);
+        console.log("Child Constructor");
+
+     this.state = {
+        count: 0,
+        count2: 2,
+     };
+    }
+
+    componentDidMount(){
+        console.log("Child Component Did Mount");
+        //API call
+    }
+    render(){
+        const {name , location} = this.props;
+        const {count, count2} = this.state;
+
+        console.log("Child Render");
+
+        return(
+            <div className="user-card">
+            <h1>Count : {count}</h1>
+            <button
+            onClick={()=>{
+            //NEVER UPDATE STATE VARIABLES DIRECTLY
+            this.setState({
+                count:this.state.count + 1,
+                count2:this.state.count2 + 1,
+
+            });
+            }}
+            >
+                Count Increase
+            </button>
+            <h2>Name:{name}</h2>
+            <h3>Location:{location}</h3>
+            <h4>Contact:@rutuchandgude</h4>
+            </div>
+        );
+    }
+}
+export default UserClass;
+/----------------
+
+- In above eg,
+<About/> is the Parent component.
+<Profile/> is the child component of <Above/>
+- If <About/> component have 2 children :
+  First child & Second child.
+
+ - In what order the above code will execute?
+
+
+-Parent Constructor
+-Parent render
+  -First Constructor
+  -First Render
+
+  -Second Constructor
+  -Second Render
+ <DOM UPDATED - IN SINGLE BATCH>
+  -First componentDidMount  
+  -Second componentDidMount
+
+-Parent componentDidMount
+
+- In React Life Cycle Diagram :
+  - React completes the render phase of every child and after that move to commit phase.
+  (Suppose after first child render , If I call first child componentDidMount it will make an api call and my second child will stay there. So, react will both render phase of first & second child.)
+
+React do rendering in 2 phases:
+ 1)Render Phase
+ 2)Commit Phase
+
+ First of all , react finishes the RENDER PHASE.
+
+ Render Phase: -> is Fast
+  - incluides constructor and render method.
+  Commit Phase :
+   ->Phase when react modifies the DOM.
+   ->componentDidMount is called after the initial render has finished.
+   ->Commit phase is slow.
+
+   Making an API call :
+   -Lets use github user api.
+   -make an api call in the child component.
+
+   -UserClass.js
+
+   class UserClass extends React.component{
+    constructor(props){
+      super(props);
+      this.state = {
+        userInfo:{
+          name:" ",
+          location:" ",
+        }
+      };
+    }
+    console.log("child-constructor");
+   }
+   async componentDidMount(){
+    const data = await fetch ("https://api-github.com/users/Rutuja");
+    const json = await data.json();
+    console.log(json);
+    this.setState({
+      userInfo:json,
+    });
+    console.log("Child-componentDidMount");
+   }
+   render(){
+    console.log("child-render");
+    return(
+      <h1>Name : {this.state.userInfo.name}</h1>
+      <img src={this.state.userInfo.avatar_url}/>
+      <h2>Location: {this.state.userInfo.location}</h2>
+    )
+   }
+
+   -Sequence of method called in above code:
+     -I have parent "About.js" inside one child "UserClass.js"
+     1)Parent-constructor
+     2)Parent-render
+     3)child-constructor
+     4)child-render
+     5)parent-componentDidMount (Is called before making API call.)
+
+ - This is because , react finishes render cycle first and then it goes to commit cycle. As child-componentDidMount, will take some time for the data to load, Parent-componentDidMount is called before. So, hence this sequence.
+
+   1)Parent-constructor
+     2)Parent-render
+     3)child-constructor
+     4)child-render
+     5)DOM is updated
+     6)Json is logged in console
+     7)Parent-componentDidMount
+     8)Child-componentDidMount-  It is called before but is but is bean put into the wait cycle. Because we are using async.
+     9)Child render
+
+     - setState trigger next render. It will trigger Reconciliation process. So, the child will be rendered once again when we have the data.
+     -This re-render cycle is known as "Updating"
+
+     - componentDidMount is called after first render.
+     -componentDidUpdate is called after every next render.
+     -Before the component is unmounted from the DOM,
+     componentWillUnmount will be called.
+
+     -NOTE: Never compare React Lifecyclemethod with functional components
+        - In modern react code , they removed the concepts of lifecycle method.
+
+      - componentDidUpdate :
+        - Is called after every subsequent render.
+        - In functional component, we use dependency array in useEffect which indicates when useEffect should be called.
+
+        Eg: useEffect(()=>{
+          //API call
+        },[count,count2]);
+
+        This means that whenever the count and count2 gets updated, useEffect gets executed.
+
+- Earlier , in class-based components,
+  this is done like below : Which is hectic !
+
+  componentDidUpdate(prevProps,prevState){
+    if(
+      this.state.count ! == prevState.count ||
+      this.state.count2 ! == prevState.count2
+    )
+    {
+      //code
+    }
+  } 
