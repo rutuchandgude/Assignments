@@ -664,3 +664,81 @@ https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
 -componentDidMount
   <API Call>
   <this.setState>
+
+//--------------------Episode-09 - Optimizing Our App-------------------------------
+
+CUSTOM HOOKS :
+ -Why should we build hooks?
+  -Reusability
+  -Readability
+  -Separation of concerns
+  -Maintainability
+
+  - Hooks are just normal javascript functions with extra power.
+  -Functions are used to wrapup a logic and can reuse it anywhere we want to.
+  Eg : In Body.js,
+   FilterData() is a function written separately. We did'nt write it between the code because it breacks modularity, reusability & readability.
+    If I need to use this function anywhere else then I can reuse it.
+
+    - Great place to keep re-usable functions :
+     -Make a folder utils (Its utility, helper or common or whatever name).
+     -Inside create a file util.js
+     -and write the function filterData() inside it and make it named export.
+     ->Any no. of helper functions can be kept inside util.js.
+     -> Advantage :
+      -Functions become readable & reusable .
+      -This makes our code more testable because we can write separate testcases for this.
+      -Maintainable because its easy to debug.
+      - Modularity means we've broken down code into small pieces. and every piece have its own responsibility.
+ 
+ -Lets take <RestaurantMenu/> component.
+  Job of this component is to show restaurant menu. 
+  i)Find out restaurant Id (resId)
+  ii)get details of the restaurant from server.
+  iii)to display.
+
+  We'll try to extract this logic.
+  We will create a custom hook that will help us to get the restaurant details.
+  [NOTE : While creating hook always start it  with "use" in front of it]
+
+  * Create a custom hook useRestaurant .
+   -> Create a new file named useRestaurantmenu.js:
+   *import { useEffect,useState } from "react";
+import { Menu_API } from "./constants";
+
+const useRestaurantmenu = (resId) =>{
+    const [resInfo, setResInfo] = useState(null);
+ 
+  useEffect(()=>{
+    fetchData();
+  },[]);
+  
+  const fetchData = async () =>{
+           const data = await fetch(Menu_API + resId);
+        const json = await data.json();
+        setResInfo(json.data);
+   
+  };
+    return resInfo;
+};
+
+export default useRestaurantmenu;
+
+=> Meanwhile in <RestaurantMenu/> :
+
+import { useParams } from "react-router-dom";
+import useRestaurantmenu from "../utils/useRestaurantMenu";
+
+const RestaurantMenu = () => {
+  const {resId } = useParams();
+//   console.log(params);
+
+const resInfo = useRestaurantmenu(resId);
+  if (resInfo === null) return <Shimmer />;
+  return(
+    //.....
+  );
+};
+export default RestaurantMenu;
+
+-----
