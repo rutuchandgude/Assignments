@@ -742,3 +742,133 @@ const resInfo = useRestaurantmenu(resId);
 export default RestaurantMenu;
 
 -----
+Next feature ->
+ - Online & Offline
+- If the user have no internet connection , then it should show "You are offline, check your internet connection."
+-Else it should show the data.
+-In Body.js ->
+
+const Body =()=>{
+  const isOnline = useOnline();
+  if(! isOnline){
+    return(
+      <h1>Check your internet connectivity</h1>
+    );
+  }
+}
+ 
+ -Now , we can create custom hook useOnline() :
+ -useOnline.js ->
+
+  import {useState, useEffect} from "react";
+  const useOnline = () =>{
+    const [isOnline, setIsOnline] = useState(true);
+    useEffect (()=>{
+      window.addEventListener("online", ()=>{
+        setIsOnline(true);
+      });
+      window.addEventListener("offline", ()=>{
+        setIsOnline(false);
+      });
+    },[])
+    return isOnline;
+  }
+  export default useOnline;
+
+  - To show fake offline :
+  - Go to crome devetools -> Network tab.
+  -> No throttling -> Change speed option (fast, slow 3G ,offline)
+
+  -Cleaning catche :
+   - whenever eventListener is added , we should clean it up.
+   - [whenever you are going offline & getting back online, eventListener is created. only once because we've empty dependency array].
+   - It is always a good practice to clear the eventListener when we go out of the component . Otherwise browser will kept hold those.
+
+   - to do that :->
+   useEffect(()=>{
+    const handleOnline =()=>{
+      setIsOnline(true);
+    };
+   })
+
+- useOnlineStatus.js ->
+
+import { useEffect, useState } from "react";
+
+const useOnlineStatus = () =>{
+    
+    const [onlineStatus, setOnlineStatus] = useState(true);
+
+    //chack if online
+    useEffect(()=>{
+        window.addEventListener("offline", ()=>{
+            setOnlineStatus(false);
+        });
+
+        window.addEventListener("online", ()=>{
+            setOnlineStatus(true);
+        })
+    }, [])
+
+    //boolean value
+    return onlineStatus;
+}
+
+export default useOnlineStatus;
+
+------
+-For the whole code, parcel creates only one .js file. In this file , all the code is bundled together. So the size of this index.js file is large. But in production bundle, size of this file should be small.
+-There would be a 100s of components in a large website like "makemytrip".
+Suppose it all these are bundled together in a single index.js file , It will blast, It will make our app very slow.
+- So, to build a large - scale production ready application , we should do:-
+"CHUNKING"
+- It is also called as ->
+-Code splitting
+-Dynamic bundling 
+-Lazy loading
+We cannot bundle everything in our app.
+
+- On Demand Loading.
+- Dynamic Import.
+
+ - Making a new different bundle in our App
+ -Let us create "Instamart"
+ -create an instamart component.
+ -In App.js file , do chunking :
+ -App.js:
+
+ Instead of importing like this :-
+  - import Instamart from "./components/Instamart";
+  - Do lazy loading :->
+  - const Instamart = lazy (()=>
+  import ("./components/Instamart"));
+  - So now the "index.js" file in dist folder won't have code of instamart. It is created as separate file while loading.
+  - This is called ON-DEMAND LOADING.
+
+  "When you are loading your component in demand, react tries to separate it."
+ 
+  - So, when instamart is loaded forthe first time, we see an error message on screen.
+    This is because , instamart file took 27ms. to get loaded. But react tries to render it before it get loaded. That's why error.
+  -> Solution for this :
+   "Suspense" -> We can wrap instamart inside suspense.
+
+   App.js :->
+   {
+    path : "/instamart",
+    element : (
+      <Suspense>
+        <Instamart/>
+      </Suspense>
+    )
+   }
+
+   React now knows that when there is a suspense, what will be loaded.
+
+   - In the intermediate time, a shimmer should be shown .
+   - So there is a prop known as "fallback".
+   -So , write:->
+   <Suspense Fallback = {<Shimmer/>} >
+   <Instamart />
+   </Suspense>
+
+   NOTE: Never ever dynamically load your component inside another component.
