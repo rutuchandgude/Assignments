@@ -872,3 +872,18 @@ We cannot bundle everything in our app.
    </Suspense>
 
    NOTE: Never ever dynamically load your component inside another component.
+
+   /*
+* Header
+*  -Logo
+*  -Nav Items
+*Body
+*  -Search
+*  -RestaurantContainer
+*    -RestaurantCard
+*Footer
+*  -Copyright
+*  -Links
+*  -Address
+*  -Contact
+*/
