@@ -14,12 +14,12 @@ const Header = () => {
   // },btnNameReact);
 
   return (
-    <div className="header">
+    <div className="flex justify-between">
       <div className="logo-container">
-        <img className="logo" src={LOGO_URL} />
+        <img className="w-36" src={LOGO_URL} />
       </div>
       <div className="nav-items">
-        <ul>
+        <ul className="flex">
           <li>Online Status : {onlineStatus ? "✅" : "🔴"}</li>
           <li to="/">
             <Link>Home</Link>

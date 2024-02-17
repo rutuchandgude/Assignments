@@ -891,7 +891,7 @@ We cannot bundle everything in our app.
 ------------------------Episode-10 - Jo Dikhta hai wo Bikta hai--------------------------------
 •
 - CSS
-- Sass - Syntactically Awesome Style Sheets
+- Sass - Syntactically Awesome Style Sheets (Writing CSS with more super powers.)
 -BootStrap
 -Material UI
 -Styled Components
@@ -899,4 +899,56 @@ We cannot bundle everything in our app.
 -Ant-Design 
 -Chakra UI 
 
--Telwind CSS
+- SCSS ANS SASS :
+ - SASS : -Original and old syntax.
+          - File save with .sass extention
+          - Syntax is similar to Ruby.
+          - Use of semicolon; bracket {} is strictly prohibitted, otherwise error occurred.
+          - Strict Indentation.
+
+ - SCSS : -New syntax File save with .scss extention
+          - Syntax is similar to CSS
+          - Use of semicolon; bracket {} is mandetory,
+           otherwise error occurred .
+           - No strict indended.
+
+-SASS AND SCSS these are not use in industry production ready application .
+- We use CSS library and frameworks.
+           
+-Telwind CSS :
+(https://tailwindcss.com/docs/guides/parcel)
+ We are using telwind CSS in our App.
+ - Install Telwind CSS with Parcel Using above commands.
+
+  > npm install -D tailwindcss postcss
+  > npx telwindcss init
+
+  -PostCSS - transform CSS inside Javascript.
+  - npx telwindcss init : this command will generate telwind.config.js file. 
+ 
+ -Configure PostCSS : 
+  Create a .postcssrc file in your project root, and enable the tailwindcss plugin.
+  -.postcssrc is used to understand what is written inside tailwind
+  - To enable pest above code in .postcssrc file.
+   
+   {
+  "plugins": {
+    "tailwindcss": {}
+  }
+}
+
+- Adding path to content:[] at 'tailwind.config.js' file .
+- This is we can use our tailwind in these files which have above extension.
+ 
+   "./src/**/*.{html,js,ts,jsx,tsx}",
+
+
+- Remove everything in index.css file and write above three lines.
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+- Done with tailwindcss configuration in our project.
+
+- tailwind basically offers you a classname for every css that you want to put in your app.
