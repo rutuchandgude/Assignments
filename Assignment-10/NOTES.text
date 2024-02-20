@@ -952,3 +952,19 @@ We cannot bundle everything in our app.
 - Done with tailwindcss configuration in our project.
 
 - tailwind basically offers you a classname for every css that you want to put in your app.
+
+----------
+-Install one extension for telwind - Tailwind CSS IntelliSense
+- Which will give suggesions as in when we are writting code.
+
+- We can also modify tailwind classes by using square brackets [] & can make dynamic classes as well.
+eg : w-[250px]
+
+- Pros and cons :
+Advantages :
+- offering faster development to us.
+Disadvantages :
+-It become lengthy and ugly.
+- It comes with initial learning.
+
+-When parcel will make the bundle of css , it will only incluid the css that is required on webpage. 
